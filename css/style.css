@@ -10,14 +10,15 @@ body {
     font-family: 'Paytone One', sans-serif;
     font-size: 20px;
     line-height: 1.5em;
-    background-color: black;
     overflow-y: hidden;
+    background-image: url("../imgs/computer_chip/Printed\ Circuit\ Board.svg");
+    background-size: cover;
 }
 
 .img-maze {
     max-width: 100%;
     max-height: 95vh;
-    cursor: crosshair;
+    cursor: url(../imgs/cursor.svg), crosshair;
 }
 
 .container {
@@ -37,4 +38,21 @@ body {
 h1 {
     font-family: 'Monoton', cursive;
     font-size: 50px;
+}
+
+.questionMark {
+    fill: #FFFFFF;
+    font-size: 62.44px;
+}
+
+.maze {
+    fill: #037519;
+}
+
+.door {
+    fill: #FF0000;
+}
+
+.black-background {
+    background-color: black;
 }
