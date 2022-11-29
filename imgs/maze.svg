@@ -8,6 +8,7 @@
 	.st2{font-family:'ArialMT';}
 	.st3{font-size:62.44px;}
 	.st4{fill:#FF0000;}
+	.st5{stroke:#FFFFFF;stroke-miterlimit:10;}
 </style>
 <path class="st0" d="M0,640v640h15V730h43v110h220v165h12V773l-27.2-0.2l-27.3-0.3l-0.3-76.3L235,620h98v98h-43v-55h-12v67h55v275
 	h12V608H168v12h55v98h-55v12h55v55h55v43l-103.7-0.2l-103.8-0.2l-0.3-54.7L70,718.1l-27.3-0.2l-27.2-0.3l-0.3-131.3L15,455.1h538v98
@@ -41,7 +42,7 @@
 	v-55h-55v-55h-67v12h55v55h55v55l82.3,0.2l82.2,0.3v207l-137.2,0.3L883,993v12h55v110h67v-12h-55v-98h153v219.5l61,0.3l61.1,0.2
 	l-0.3-6.2l-0.3-6.3l-27.2-0.3l-27.3-0.2v-97h55v-12h-67.5l0.2,54.5l0.3,54.5h-43v-152h110V828h-13v220h-97v-43h55V785h55V675h42
 	v241.5c0,132.8-0.3,241.4-0.7,241.4s-12.9-0.1-27.6,0l-26.8,0.1l0.3,5.7l0.3,5.8l27.3,0.3l27.2,0.2v97H345v-55h-67v13h55v42H70v-42
-	h165v-13H58v68h1222V0H663L663,7.6L663,7.6z"/>
+	h165v-13H58v68h1222V0H663V7.6L663,7.6z"/>
 <rect x="620" class="st0" width="43" height="15"/>
 <text transform="matrix(1 0 0 1 1007.7866 765.0416)" class="st1 st2 st3">?</text>
 <text transform="matrix(1 0 0 1 18.91 1217.5701)" class="st1 st2 st3">?</text>
@@ -49,4 +50,5 @@
 <text transform="matrix(1 0 0 1 513.9852 66.9409)" class="st1 st2 st3">?</text>
 <text transform="matrix(1 0 0 1 405.0247 603.0778)" class="st1 st2 st3">?</text>
 <rect x="15" y="1266.3" class="st4" width="43" height="13.7"/>
+<circle class="st5" cx="1135.1" cy="588.6" r="14.5"/>
 </svg>

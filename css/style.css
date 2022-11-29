@@ -9,7 +9,7 @@ body {
     color: #037519;
     font-family: 'Paytone One', sans-serif;
     font-size: 20px;
-    line-height: 1.5em;
+    line-height: 1.75em;
     overflow-y: hidden;
     background-image: url("../imgs/computer_chip/Printed\ Circuit\ Board.svg");
     background-size: cover;
@@ -51,6 +51,10 @@ h1 {
 
 .door {
     fill: #FF0000;
+}
+
+.circle {
+    stroke-miterlimit: 10;
 }
 
 .black-background {
