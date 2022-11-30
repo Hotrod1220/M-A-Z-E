@@ -6,6 +6,8 @@ var elementPos;
 var idName;
 var puzzleWord;
 var answer;
+var index = 0;
+var letter;
 var questionsAnswered = [false, false, false, false, false];
 
 //main 
@@ -67,12 +69,12 @@ function question() {
 
     console.log(puzzleWord);
 
-    // var letter = "<br><h2 class='letter'>"
-    // for (var i = 0; i < puzzleWord.length; i++) {
-    //     var character = letter + puzzleWord[i] + "</h2>"
-    //     displayString(character, i);
-    //     $(".letter").remove();
-    // }
+    for (var i = 0; i < puzzleWord.length; i++) {
+        var character = "<h2 class='letter' id=letter" + i + ">" + puzzleWord[i] + "</h2> "
+        displayString(character, i);
+    }
+
+    // displayString(puzzleWord);
 
     $(document).on("keyup", function (e) {
         if (answer.length != puzzleWord.length) {
@@ -105,12 +107,30 @@ function question() {
 
 //This is the part that is not working
 
-// function displayString(letterChar, index) {
-//     setTimeout(function () {
-//         $("#text").append(letterChar);
-//         $(".letter").fadeToggle();
-//     }, 1000 * index);
+function displayString(letterChar, index) {
+    setTimeout(function () {
+        $("#text").append(letterChar);
+        $("#letter" + index).fadeToggle();
+        $("#letter" + index).fadeToggle();
+        $("#letter" + index).remove();
+    }, 1000 * index);
+}
+
+// function displayString(stringName) {
+//     var printNextLetter = function () {
+//         letter = "<h2 class='letter' id=letter" + index + ">" + stringName[index] + "</h2>"
+//         console.log(letter)
+//         if (index < stringName.length) {
+//             $("#text").append(letter);
+//             setTimeout(printNextLetter, 1000 * index);
+//             index++;
+//         }
+//         $("#letter" + index).fadeToggle();
+//     }
+//     console.log("#letter" + index)
+//     printNextLetter();
 // }
+
 
 $(".maze").on("mouseover", function () {
     console.log("Touching");
