@@ -64,3 +64,9 @@ h1 {
 .black-background {
     background-color: black;
 }
+
+.letter {
+    font-size: 70px;
+    color: #FF0000;
+    text-align: center;
+}

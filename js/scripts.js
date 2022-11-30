@@ -2,7 +2,6 @@
 var hoverText = "<h2>Hover over to the circle to continue hacking</h2>"
 var questionText = "<h2>Press the keys that you see in order.</h2>"
 var visibleMaze = false;
-var puzzleIndex = 0;
 
 //main 
 hoverCircle("start");
@@ -61,7 +60,13 @@ function question() {
     }
 
     console.log(puzzleWord);
-    displayString(puzzleWord);
+
+    var letter = "<br><h2 class='letter'>"
+    for (var i = 0; i < puzzleWord.length; i++) {
+        var character = letter + puzzleWord[i] + "</h2>"
+        displayString(character, i);
+        $(".letter").remove();
+    }
 
     $(document).on("keypress", function (e) {
         if (answer.length != puzzleWord.length) {
@@ -86,38 +91,12 @@ function question() {
 
 //This is the part that is not working
 
-// function displayString(stringName) {
-//     for (var i = 0; i < stringName.length; i++) {
-//         var letter = "<br><h2 id='letter'>" + stringName[i] + "</h2>"
-//         $("#letter").css("font-size", "70px");
-//         $("#letter").css("color", "#FF0000");
-//         $("#letter").css("text-align", "center");
-//         $("#text").append(letter);
-//         $("#letter").toggle();
-//         $("#letter").delay("100").fadeToggle();
-//         $("#letter").delay("100").fadeToggle();
-//     }
-// }
-
-// console.log(puzzleIndex);
-
-// function displayString(stringName) {
-//     console.log(stringName[puzzleIndex]);
-//     $(".letter").css("font-size", "70px");
-//     $(".letter").css("color", "#FF0000");
-//     $(".letter").css("text-align", "center");
-//     setTimeout(function () {
-//         var letter = "<br><h2 class='letter'>" + stringName[puzzleIndex] + "</h2>"
-//         $("#text").append(letter);
-//         $(".letter").toggle();
-//         $(".letter").fadeToggle();
-//         $(".letter").fadeToggle();
-//         puzzleIndex++;
-//         if (puzzleIndex != stringName.length) {
-//             displayString(stringName);
-//         }
-//     }, 100);
-// }
+function displayString(letterChar, index) {
+    setTimeout(function () {
+        $("#text").append(letterChar);
+        $(".letter").fadeToggle();
+    }, 1000 * index);
+}
 
 
 
