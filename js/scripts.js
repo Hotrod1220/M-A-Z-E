@@ -2,6 +2,7 @@
 var hoverText = "<h2>Hover over to the circle to continue hacking</h2>"
 var questionText = "<h2>Press the keys that you see in order.</h2>"
 var visibleMaze = false;
+var elementPos;
 
 //main 
 hoverCircle("start");
@@ -14,7 +15,7 @@ function hoverCircle(idName) {
         console.log("hoverCircle called when maze visible");
     }
     else {
-        var elementPos = document.getElementById(idName).getBoundingClientRect();
+        elementPos = document.getElementById(idName).getBoundingClientRect();
         $("#text").append(hoverText);
 
         $("#content").after("<img src='../imgs/circle.svg' alt='Circle Image' id='circle-img' class='circle'>");
@@ -36,12 +37,13 @@ function hoverCircle(idName) {
             visibleMaze = true;
             $("#text h2").remove();
         });
+        delete elementPos;
     }
 }
 
 function question() {
     var idName = this.id;
-    var puzzleWord;
+    var puzzleWord = "";
     var answer = "";
 
     $("#text").append(questionText);
@@ -59,46 +61,62 @@ function question() {
         puzzleWord = (Math.random() + 1).toString(36).substring(7);
     }
 
-    console.log(puzzleWord);
+    console.log("Before Puzzle: ", puzzleWord);
+    console.log("Before Answer: ", answer);
 
-    var letter = "<br><h2 class='letter'>"
-    for (var i = 0; i < puzzleWord.length; i++) {
-        var character = letter + puzzleWord[i] + "</h2>"
-        displayString(character, i);
-        $(".letter").remove();
-    }
+    // var letter = "<br><h2 class='letter'>"
+    // for (var i = 0; i < puzzleWord.length; i++) {
+    //     var character = letter + puzzleWord[i] + "</h2>"
+    //     displayString(character, i);
+    //     $(".letter").remove();
+    // }
 
     $(document).on("keypress", function (e) {
+        console.log("Before Adding Puzzle: ", puzzleWord);
+        console.log("Before Adding Answer: ", answer);
+
         if (answer.length != puzzleWord.length) {
             answer += e.key;
             console.log(answer);
             //add input so user knows key input was taken
         }
-
         if (answer == puzzleWord) {
-            console.log("Solved!");
+            console.log("Right Puzzle: ", puzzleWord);
+            console.log("Right: ", answer);
+            answer = "";
+
+            $("#text h2").remove();
+            hoverCircle(idName);
+
+            $("#" + idName).remove();
+
             //show they got it right
-        }
-        else if (answer.length == puzzleWord.length) {
+            console.log("Solved!");
+            puzzleWorld = "";
+        } else if (answer.length == puzzleWord.length) {
+            console.log("Wrong Puzzle: ", puzzleWord);
+            console.log("Wrong Answer: ", answer);
+
             //show they got it wrong
             console.log("Wrong!");
-            answer = "";
-            displayString(puzzleWord);
+
+            // for (var i = 0; i < puzzleWord.length; i++) {
+            //     var character = letter + puzzleWord[i] + "</h2>"
+            //     displayString(character, i);
+            //     $(".letter").remove();
+            // }
         }
     });
-
 }
 
 //This is the part that is not working
 
-function displayString(letterChar, index) {
-    setTimeout(function () {
-        $("#text").append(letterChar);
-        $(".letter").fadeToggle();
-    }, 1000 * index);
-}
-
-
+// function displayString(letterChar, index) {
+//     setTimeout(function () {
+//         $("#text").append(letterChar);
+//         $(".letter").fadeToggle();
+//     }, 1000 * index);
+// }
 
 $(".maze").on("mouseover", function () {
     console.log("Touching");
