@@ -1,6 +1,8 @@
 
 var hoverText = "<h2>Hover over to the circle to continue hacking</h2>"
+var questionText = "<h2>Press the keys that you see in order.</h2>"
 var visibleMaze = false;
+var puzzleIndex = 0;
 
 //main 
 hoverCircle("start");
@@ -41,8 +43,10 @@ function hoverCircle(idName) {
 function question() {
     var idName = this.id;
     var puzzleWord;
+    var answer = "";
 
-    console.log(idName);
+    $("#text").append(questionText);
+
     $(".img-maze").css("visibility", "hidden");
     visibleMaze = false;
 
@@ -56,12 +60,64 @@ function question() {
         puzzleWord = (Math.random() + 1).toString(36).substring(7);
     }
 
+    console.log(puzzleWord);
+    displayString(puzzleWord);
 
+    $(document).on("keypress", function (e) {
+        if (answer.length != puzzleWord.length) {
+            answer += e.key;
+            console.log(answer);
+            //add input so user knows key input was taken
+        }
+
+        if (answer == puzzleWord) {
+            console.log("Solved!");
+            //show they got it right
+        }
+        else if (answer.length == puzzleWord.length) {
+            //show they got it wrong
+            console.log("Wrong!");
+            answer = "";
+            displayString(puzzleWord);
+        }
+    });
 
 }
 
+//This is the part that is not working
 
+// function displayString(stringName) {
+//     for (var i = 0; i < stringName.length; i++) {
+//         var letter = "<br><h2 id='letter'>" + stringName[i] + "</h2>"
+//         $("#letter").css("font-size", "70px");
+//         $("#letter").css("color", "#FF0000");
+//         $("#letter").css("text-align", "center");
+//         $("#text").append(letter);
+//         $("#letter").toggle();
+//         $("#letter").delay("100").fadeToggle();
+//         $("#letter").delay("100").fadeToggle();
+//     }
+// }
 
+// console.log(puzzleIndex);
+
+// function displayString(stringName) {
+//     console.log(stringName[puzzleIndex]);
+//     $(".letter").css("font-size", "70px");
+//     $(".letter").css("color", "#FF0000");
+//     $(".letter").css("text-align", "center");
+//     setTimeout(function () {
+//         var letter = "<br><h2 class='letter'>" + stringName[puzzleIndex] + "</h2>"
+//         $("#text").append(letter);
+//         $(".letter").toggle();
+//         $(".letter").fadeToggle();
+//         $(".letter").fadeToggle();
+//         puzzleIndex++;
+//         if (puzzleIndex != stringName.length) {
+//             displayString(stringName);
+//         }
+//     }, 100);
+// }
 
 
 
