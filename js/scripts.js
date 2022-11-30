@@ -3,6 +3,9 @@ var hoverText = "<h2>Hover over to the circle to continue hacking</h2>"
 var questionText = "<h2>Press the keys that you see in order.</h2>"
 var visibleMaze = false;
 var elementPos;
+var idName;
+var puzzleWord;
+var answer;
 
 //main 
 hoverCircle("start");
@@ -42,9 +45,9 @@ function hoverCircle(idName) {
 }
 
 function question() {
-    var idName = this.id;
-    var puzzleWord = "";
-    var answer = "";
+    idName = this.id;
+    puzzleWord = "";
+    answer = "";
 
     $("#text").append(questionText);
 
@@ -61,8 +64,7 @@ function question() {
         puzzleWord = (Math.random() + 1).toString(36).substring(7);
     }
 
-    console.log("Before Puzzle: ", puzzleWord);
-    console.log("Before Answer: ", answer);
+    console.log(puzzleWord);
 
     // var letter = "<br><h2 class='letter'>"
     // for (var i = 0; i < puzzleWord.length; i++) {
@@ -71,19 +73,18 @@ function question() {
     //     $(".letter").remove();
     // }
 
-    $(document).on("keypress", function (e) {
-        console.log("Before Adding Puzzle: ", puzzleWord);
-        console.log("Before Adding Answer: ", answer);
-
+    $(document).on("keyup", function (e) {
+        // console.log("Before Adding Puzzle: ", puzzleWord);
+        // console.log("Before Adding Answer: ", answer);
+        console.log(e.key);
         if (answer.length != puzzleWord.length) {
             answer += e.key;
-            console.log(answer);
+            console.log("answer", answer);
             //add input so user knows key input was taken
         }
         if (answer == puzzleWord) {
-            console.log("Right Puzzle: ", puzzleWord);
-            console.log("Right: ", answer);
-            answer = "";
+            // console.log("Right Puzzle: ", puzzleWord);
+            // console.log("Right: ", answer);
 
             $("#text h2").remove();
             hoverCircle(idName);
@@ -92,10 +93,9 @@ function question() {
 
             //show they got it right
             console.log("Solved!");
-            puzzleWorld = "";
         } else if (answer.length == puzzleWord.length) {
-            console.log("Wrong Puzzle: ", puzzleWord);
-            console.log("Wrong Answer: ", answer);
+            // console.log("Wrong Puzzle: ", puzzleWord);
+            // console.log("Wrong Answer: ", answer);
 
             //show they got it wrong
             console.log("Wrong!");
@@ -105,6 +105,7 @@ function question() {
             //     displayString(character, i);
             //     $(".letter").remove();
             // }
+            answer = "";
         }
     });
 }
