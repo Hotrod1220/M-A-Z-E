@@ -6,6 +6,7 @@ var elementPos;
 var idName;
 var puzzleWord;
 var answer;
+var questionsAnswered = [false, false, false, false, false];
 
 //main 
 hoverCircle("start");
@@ -74,29 +75,21 @@ function question() {
     // }
 
     $(document).on("keyup", function (e) {
-        // console.log("Before Adding Puzzle: ", puzzleWord);
-        // console.log("Before Adding Answer: ", answer);
-        console.log(e.key);
         if (answer.length != puzzleWord.length) {
             answer += e.key;
-            console.log("answer", answer);
             //add input so user knows key input was taken
         }
         if (answer == puzzleWord) {
-            // console.log("Right Puzzle: ", puzzleWord);
-            // console.log("Right: ", answer);
-
             $("#text h2").remove();
             hoverCircle(idName);
 
+            questionsAnswered[idName[1]] = true;
             $("#" + idName).remove();
 
             //show they got it right
             console.log("Solved!");
+            $(document).unbind("keypress");
         } else if (answer.length == puzzleWord.length) {
-            // console.log("Wrong Puzzle: ", puzzleWord);
-            // console.log("Wrong Answer: ", answer);
-
             //show they got it wrong
             console.log("Wrong!");
 
@@ -122,10 +115,3 @@ function question() {
 $(".maze").on("mouseover", function () {
     console.log("Touching");
 });
-
-// var visibleMaze = true;
-// $(document).on("click", function () {
-//     $(".img-maze").css("visibility", "visible");
-//     $(".img-maze").css("visibility", "hidden");
-// });
-
