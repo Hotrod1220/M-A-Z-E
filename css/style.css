@@ -18,7 +18,8 @@ body {
 .img-maze {
     max-width: 100%;
     max-height: 95vh;
-    cursor: url(../imgs/cursor.svg), crosshair;
+    cursor: url(../imgs/cursor.svg) 10 15, crosshair;
+    visibility: hidden;
 }
 
 .container {
@@ -54,7 +55,10 @@ h1 {
 }
 
 .circle {
+    position: absolute;
     stroke-miterlimit: 10;
+    background-color: #FF0000;
+    border-radius: 20px;
 }
 
 .black-background {
