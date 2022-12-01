@@ -22,7 +22,7 @@ function hoverCircle(idName) {
     }
     else {
         elementPos = document.getElementById(idName).getBoundingClientRect();
-        $("#text").append(hoverText);
+        $("#text-para").append(hoverText);
 
         $("#content").after("<img src='../imgs/circle.svg' alt='Circle Image' id='circle-img' class='circle'>");
 
@@ -41,7 +41,7 @@ function hoverCircle(idName) {
             $("#circle-img").remove();
             $(".img-maze").css("visibility", "visible");
             visibleMaze = true;
-            $("#text h2").remove();
+            $("#text-para h2").remove();
         });
         delete elementPos;
     }
@@ -52,7 +52,7 @@ function question() {
     puzzleWord = "";
     answer = "";
 
-    $("#text").append(questionText);
+    $("#text-para").append(questionText);
 
     $(".img-maze").css("visibility", "hidden");
     visibleMaze = false;
@@ -69,23 +69,25 @@ function question() {
 
     console.log(puzzleWord);
 
-    for (var i = 0; i < puzzleWord.length; i++) {
-        var character = "<h2 class='letter' id=letter" + i + ">" + puzzleWord[i] + "</h2> "
-        displayString(character, i);
-    }
+    // Do I want it to display different?
+    puzzleWordHtml = "<h3 class=letter id=letter" + idName[1] + ">" + puzzleWord + "</h3>"
+    $("#text-para").append(puzzleWordHtml);
+    $("#letter" + idName[1]).delay(2500).fadeToggle();
 
-    // displayString(puzzleWord);
-
-    $(document).on("keyup", function (e) {
+    $(document).on("keypress", function (e) {
+        console.log(puzzleWord);
         if (answer.length != puzzleWord.length) {
             answer += e.key;
+            console.log(answer);
             //add input so user knows key input was taken
         }
         if (answer == puzzleWord) {
-            $("#text h2").remove();
+            $("#text-para h2").remove();
             hoverCircle(idName);
 
             questionsAnswered[idName[1]] = true;
+            console.log(questionsAnswered[idName[1]]);
+
             $("#" + idName).remove();
 
             //show they got it right
@@ -95,33 +97,41 @@ function question() {
             //show they got it wrong
             console.log("Wrong!");
 
-            // for (var i = 0; i < puzzleWord.length; i++) {
-            //     var character = letter + puzzleWord[i] + "</h2>"
-            //     displayString(character, i);
-            //     $(".letter").remove();
-            // }
+            $("#letter" + idName[1]).fadeToggle();
+            $("#letter" + idName[1]).delay(2500).fadeToggle();
             answer = "";
         }
     });
+    console.log(questionsAnswered[0], questionsAnswered[1], questionsAnswered[2], questionsAnswered[3], questionsAnswered[4])
+    if (questionsAnswered[0] == true && questionsAnswered[1] == true && questionsAnswered[2] == true && questionsAnswered[3] == true && questionsAnswered[4] == true) {
+        $(".door").remove();
+    }
 }
 
-//This is the part that is not working
 
-function displayString(letterChar, index) {
-    setTimeout(function () {
-        $("#text").append(letterChar);
-        $("#letter" + index).fadeToggle();
-        $("#letter" + index).fadeToggle();
-        $("#letter" + index).remove();
-    }, 1000 * index);
-}
+$(".maze, .door").on("mouseover", function () {
+    console.log("Touching");
+});
+
+
+
+
+
+// function displayString(letterChar, index) {
+//     setTimeout(function () {
+//         $("#text-para").append(letterChar);
+//         $("#letter" + index).fadeToggle();
+//         $("#letter" + index).fadeToggle();
+//         $("#letter" + index).remove();
+//     }, 1000 * index);
+// }
 
 // function displayString(stringName) {
 //     var printNextLetter = function () {
 //         letter = "<h2 class='letter' id=letter" + index + ">" + stringName[index] + "</h2>"
 //         console.log(letter)
 //         if (index < stringName.length) {
-//             $("#text").append(letter);
+//             $("#text-para").append(letter);
 //             setTimeout(printNextLetter, 1000 * index);
 //             index++;
 //         }
@@ -130,8 +140,3 @@ function displayString(letterChar, index) {
 //     console.log("#letter" + index)
 //     printNextLetter();
 // }
-
-
-$(".maze").on("mouseover", function () {
-    console.log("Touching");
-});
