@@ -20,7 +20,7 @@ $(".maze, .door").on("mouseover", gameOver);
 
 svg = document.getElementById("exit").getBoundingClientRect();
 $(document).on("mouseover", function (e) {
-    if (svg.bottom < e.clientY && visibleMaze == true)
+    if (svg.bottom < e.clientY && visibleMaze == true && (questionsAnswered[0] == true && questionsAnswered[1] == true && questionsAnswered[2] == true && questionsAnswered[3] == true && questionsAnswered[4] == true))
         winGame();
 });
 
@@ -142,6 +142,8 @@ function question() {
 function gameOver() {
     $(".game-over").html(loseText);
     $(".game-over").css("visibility", "visible");
+    $(".game-over").css("border", ".75rem solid");
+    $(".game-over").css("border-color", "red");
     $(".button").on("click", function () {
         location.reload();
     });
@@ -150,6 +152,8 @@ function gameOver() {
 function winGame() {
     $(".game-over").html(winText);
     $(".game-over").css("visibility", "visible");
+    $(".game-over").css("border", ".75rem solid");
+    $(".game-over").css("border-color", "#00D404");
     $(".button").on("click", function () {
         location.reload();
     });
