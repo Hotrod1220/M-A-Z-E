@@ -13,7 +13,7 @@ var questionsAnswered = [false, false, false, false, false];
 //main 
 hoverCircle("start");
 $(".questionMark").on("mouseover", question);
-$(".maze, .door").on("mouseover", function () { });
+$(".maze, .door").on("mouseover", gameOver);
 $(document).on("mouseover", function (e) {
     svg = document.getElementById("exit").getBoundingClientRect();
     if (svg.bottom < e.clientY && visibleMaze == true)
