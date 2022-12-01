@@ -13,9 +13,18 @@ var questionsAnswered = [false, false, false, false, false];
 //main 
 hoverCircle("start");
 $(".questionMark").on("mouseover", question);
+$(".maze, .door").on("mouseover", gameOver);
+
+function resizedw() {
+    window.location.reload();
+}
+var doit;
+window.onresize = function () {
+    clearTimeout(doit);
+    doit = setTimeout(resizedw, 100);
+};
 
 //functions
-
 function hoverCircle(idName) {
     if (visibleMaze == true) {
         console.log("hoverCircle called when maze visible");
@@ -121,7 +130,9 @@ function question() {
     });
 }
 
-
-$(".maze, .door").on("mouseover", function () {
-    console.log("Touching");
-});
+function gameOver() {
+    $(".game-over").css("visibility", "visible");
+    $(".button").on("click", function () {
+        location.reload();
+    });
+}

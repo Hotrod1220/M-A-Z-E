@@ -70,3 +70,33 @@ h1 {
     color: #FF0000;
     text-align: center;
 }
+
+.game-over {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 0px;
+    height: 100vh;
+    width: 100%;
+    background-color: black;
+    z-index: 10;
+    text-align: center;
+    visibility: hidden;
+}
+
+.button {
+    padding: 15px 30px;
+    display: inline-block;
+    color: black;
+    background-color: #037519;
+    align-items: center;
+    justify-content: start;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #006602;
+}
