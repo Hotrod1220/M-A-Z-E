@@ -44,7 +44,7 @@ function hoverCircle(idName) {
         elementPos = document.getElementById(idName).getBoundingClientRect();
         $("#text-para").append(hoverText);
 
-        $("#content").after("<img src='../imgs/circle.svg' alt='Circle Image' id='circle-img' class='circle'>");
+        $("#content").after("<img src='imgs/circle.svg' alt='Circle Image' id='circle-img' class='circle'>");
 
         var translationLeft = elementPos.left + 8 + "px";
 
