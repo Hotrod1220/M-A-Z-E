@@ -110,6 +110,8 @@ a:hover {
 }
 
 .sources {
+    position: absolute;
+    bottom: 0;
     font-size: 15px;
     line-height: 1.25em;
 }
