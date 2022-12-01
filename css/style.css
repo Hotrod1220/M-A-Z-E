@@ -100,3 +100,16 @@ h1 {
 .button:hover {
     background-color: #006602;
 }
+
+a {
+    color: #037519;
+}
+
+a:hover {
+    color: #006602;
+}
+
+.sources {
+    font-size: 15px;
+    line-height: 1.25em;
+}

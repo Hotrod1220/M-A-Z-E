@@ -2,20 +2,24 @@
 var hoverText = "<h2>Hover over to the circle to continue hacking</h2>"
 var questionText = "<h2>Press the keys in order. It will display again if it's wrong.</h2>"
 var winText = "<h2>You've successful wreaked havoc and have downloaded hundreds of cat videos</h2><h1>WooHoo!</h1><h3 class='button'>Try Again</h3>"
+var loseText = "<h2><h2>Virus detected by the firewall.</h2><h1>Termination complete!</h1><h3 class='button'>Try Again</h3>"
 var visibleMaze = false;
+var visibleSource = false;
 var elementPos;
 var idName;
 var puzzleWord;
 var answer;
 var svg;
+var tries = 0;
 var questionsAnswered = [false, false, false, false, false];
 
 //main 
 hoverCircle("start");
 $(".questionMark").on("mouseover", question);
 $(".maze, .door").on("mouseover", gameOver);
+
+svg = document.getElementById("exit").getBoundingClientRect();
 $(document).on("mouseover", function (e) {
-    svg = document.getElementById("exit").getBoundingClientRect();
     if (svg.bottom < e.clientY && visibleMaze == true)
         winGame();
 });
@@ -28,6 +32,8 @@ window.onresize = function () {
     clearTimeout(doit);
     doit = setTimeout(resizedw, 100);
 };
+
+
 
 //functions
 function hoverCircle(idName) {
@@ -113,10 +119,10 @@ function question() {
             $(".black-background").css("box-shadow", "1em 0 .4em #00D404, -1em 0 .4em #00D404");
             setTimeout(function () {
                 $(".black-background").css("box-shadow", "none");
-            }, 300);
+            }, 800);
 
             $(document).unbind("keypress");
-
+            tries = 0;
         } else if (answer.length == puzzleWord.length) {
             $(".black-background").css("box-shadow", "1em 0 .4em red, -1em 0 .4em red");
             setTimeout(function () {
@@ -126,11 +132,15 @@ function question() {
             $("#letter" + idName[1]).fadeToggle();
             $("#letter" + idName[1]).delay(2500).fadeToggle();
             answer = "";
+            tries++;
+            if (tries == 3)
+                gameOver();
         }
     });
 }
 
 function gameOver() {
+    $(".game-over").html(loseText);
     $(".game-over").css("visibility", "visible");
     $(".button").on("click", function () {
         location.reload();
