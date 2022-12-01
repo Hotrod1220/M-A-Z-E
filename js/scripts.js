@@ -1,19 +1,24 @@
 
 var hoverText = "<h2>Hover over to the circle to continue hacking</h2>"
 var questionText = "<h2>Press the keys in order. It will display again if it's wrong.</h2>"
+var winText = "<h2>You've successful wreaked havoc and have downloaded hundreds of cat videos</h2><h1>WooHoo!</h1><h3 class='button'>Try Again</h3>"
 var visibleMaze = false;
 var elementPos;
 var idName;
 var puzzleWord;
 var answer;
-var index = 0;
-var letter;
+var svg;
 var questionsAnswered = [false, false, false, false, false];
 
 //main 
 hoverCircle("start");
 $(".questionMark").on("mouseover", question);
-$(".maze, .door").on("mouseover", gameOver);
+$(".maze, .door").on("mouseover", function () { });
+$(document).on("mouseover", function (e) {
+    svg = document.getElementById("exit").getBoundingClientRect();
+    if (svg.bottom < e.clientY && visibleMaze == true)
+        winGame();
+});
 
 function resizedw() {
     window.location.reload();
@@ -76,8 +81,6 @@ function question() {
         puzzleWord = (Math.random() + 1).toString(36).substring(7);
     }
 
-    console.log(puzzleWord);
-
     puzzleWordHtml = "<h3 class=letter id=letter" + idName[1] + ">" + puzzleWord + "</h3>"
     $("#text-para").append(puzzleWordHtml);
     if (idName[1] == 2) {
@@ -88,10 +91,8 @@ function question() {
     }
 
     $(document).on("keypress", function (e) {
-        console.log(puzzleWord);
         if (answer.length != puzzleWord.length) {
             answer += e.key;
-            console.log(answer);
             $(".black-background").css("box-shadow", "1em 0 .4em #006602, -1em 0 .4em #006602");
             setTimeout(function () {
                 $(".black-background").css("box-shadow", "none");
@@ -103,7 +104,6 @@ function question() {
             $("#text-para h2").remove();
             hoverCircle(idName);
 
-            console.log(questionsAnswered[0], questionsAnswered[1], questionsAnswered[2], questionsAnswered[3], questionsAnswered[4])
             if (questionsAnswered[0] == true && questionsAnswered[1] == true && questionsAnswered[2] == true && questionsAnswered[3] == true && questionsAnswered[4] == true) {
                 $(".door").remove();
             }
@@ -131,6 +131,14 @@ function question() {
 }
 
 function gameOver() {
+    $(".game-over").css("visibility", "visible");
+    $(".button").on("click", function () {
+        location.reload();
+    });
+}
+
+function winGame() {
+    $(".game-over").html(winText);
     $(".game-over").css("visibility", "visible");
     $(".button").on("click", function () {
         location.reload();
